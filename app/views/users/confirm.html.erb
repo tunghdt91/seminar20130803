@@ -1,0 +1,27 @@
+name: <%= @user.name %><br>
+visibility: <%= @user.visibility %><br>
+
+<%= form_for @user do |f| %>
+<%= f.hidden_field :name %>
+<%= f.hidden_field :visibility %>
+<%= hidden_field_tag :reedit, false %>
+<%= hidden_field_tag :confirmed, false %>
+<%= f.button "re-edit", {class: %W(btn btn-danger)} %>
+<%= f.button "submit", {class: %W(btn btn-success)} %>
+<% end %>
+<script>
+  $(function(){
+    $("button:first").click(function(e){
+      e.preventDefault();
+      var $form = $(this).closest("form");
+      $form.find("input[name=reedit]").val("true");
+      $form.submit();
+    });
+    $("button:last").click(function(e){
+      e.preventDefault();
+      var $form = $(this).closest("form");
+      $form.find("input[name=confirmed]").val("true");
+      $form.submit();
+    });
+  });
+</script>
